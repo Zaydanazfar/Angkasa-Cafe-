@@ -1,0 +1,2 @@
+Folder ini berisi foto menu (16 foto .jpg).
+Untuk mengganti foto, pakai nama file yang sama (contoh: espresso.jpg, cafe-latte.jpg).

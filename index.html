@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cafe Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header><div class="wrap">
+<a class="brand" href="#home"><img src="gambar/logo.webp" alt="Logo Cafe Angkasa"><span>Cafe Angkasa</span></a>
+<nav aria-label="Navigasi utama"><a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main>
+<div class="hero" id="home">
+<video autoplay muted loop playsinline preload="auto" aria-label="Suasana Cafe Angkasa" src="video/video.mp4"></video>
+<div class="wrap">
+<h1>Secangkir kopi, setinggi langit.</h1>
+<p>Tempat santai untuk ngopi, ngobrol, dan menikmati hari dengan tenang.</p>
+<div class="btns"><a class="btn" href="#menu">Lihat menu</a><a class="btn ghost" href="#contact">Kunjungi kami</a></div>
+</div></div>
+
+<section id="menu"><div class="wrap">
+<h2>Menu</h2>
+<p class="lead">Diseduh segar setiap hari. Harga dalam rupiah.</p>
+<div class="tabs" role="tablist" aria-label="Kategori menu">
+<button class="tab" role="tab" aria-selected="true" data-c="kopi">Kopi</button>
+<button class="tab" role="tab" aria-selected="false" data-c="non">Non-kopi</button>
+<button class="tab" role="tab" aria-selected="false" data-c="makan">Makanan</button>
+</div>
+<ul class="menu" id="list" role="tabpanel"></ul>
+</div></section>
+
+<section id="about"><div class="wrap about">
+<div class="disc"><img src="gambar/logo.webp" alt=""></div>
+<div>
+<h2>Tentang Cafe Angkasa</h2>
+<p>Angkasa berarti langit. Kami ingin setiap tamu merasa ringan seperti duduk di atas awan, dengan secangkir kopi hangat di tangan.</p>
+<p>Biji kopi kami dipilih dari petani lokal Indonesia, disangrai medium, lalu diseduh oleh barista kami saat Anda memesan.</p>
+<ul class="facts"><li><b>Lokal</b>biji kopi Nusantara</li><li><b>Segar</b>diseduh saat dipesan</li><li><b>Santai</b>Wi-Fi dan colokan tersedia</li></ul>
+</div></div></section>
+
+<section id="contact"><div class="wrap">
+<h2>Contact</h2>
+<p class="lead">Mampir, telepon, atau kirim pesan. Kami senang menyambut Anda.</p>
+<div class="cards">
+<div class="card"><h3>Alamat</h3><p>Jl. Menuju akherat jalur mimpi No. 12<br>Jakarta, Indonesia</p></div>
+<div class="card"><h3>Jam buka</h3><p>Senin sampai Jumat: 08.00 - 22.00<br>Sabtu dan Minggu: 09.00 - 23.00</p></div>
+<div class="card"><h3>Hubungi kami</h3><p>WhatsApp: 0812-0000-0000<br>Instagram: @cafeangkasa</p></div>
+</div>
+<a class="btn" style="background:var(--ink);color:var(--bg)" href="https://wa.me/6281200000000">Pesan lewat WhatsApp</a>
+</div></section>
+</main>
+<footer>&copy; 2026 Cafe Angkasa. Semua hak dilindungi.</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
