@@ -61,14 +61,22 @@ document.addEventListener('click',e=>{
   if(e.target.matches('dialog'))e.target.close();
 });
 $('#cartBtn').onclick=()=>dCart.showModal();
-$('#cGo').onclick=()=>{dCart.close();f.reset();addr();dCo.showModal();sumCo()};
+$('#cGo').onclick=()=>{dCart.close();f.reset();phErr.textContent='';ph.classList.remove('bad');chkPhone();addr();dCo.showModal();sumCo()};
 $('#cClear').onclick=()=>{cart=[];coupon='';save();render()};
 $('#codeBtn').onclick=()=>{const v=$('#code').value.trim().toUpperCase();if(!v){coupon='';save();return render()}if(v!=='BARU15')return toast('Kode tidak valid');coupon=v;save();render();toast('Kode BARU15 dipakai ✓')};
 const addr=()=>{const d=f.type.value==='delivery';$('#addrBox').hidden=!d;f.addr.required=d;sumCo()};
 f.type.addEventListener('change',addr);
-f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length||!f.reportValidity())return;
+/* Nomor HP: boleh diketik dengan spasi/strip/+62, otomatis dirapikan jadi 08xxxxxxxxxx */
+const ph=f.phone,phErr=$('#phoneErr');
+const phoneNorm=v=>{let d=String(v).replace(/\D/g,'');if(d.startsWith('62'))d='0'+d.slice(2);else if(d.startsWith('8'))d='0'+d;return d};
+const chkPhone=show=>{const n=phoneNorm(ph.value),empty=!ph.value.trim(),ok=/^08\d{8,12}$/.test(n);
+  const msg=empty?'Nomor HP wajib diisi.':ok?'':'Nomor HP tidak valid. Contoh: 0812 3456 7890';
+  ph.setCustomValidity(msg);if(show){phErr.textContent=msg;ph.classList.toggle('bad',!!msg)}return ok};
+ph.addEventListener('input',()=>{ph.value=ph.value.replace(/[^\d+\s-]/g,'');chkPhone(ph.classList.contains('bad'))});
+ph.addEventListener('blur',()=>{if(ph.value.trim())chkPhone(true)});
+f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length)return;chkPhone(true);if(!f.reportValidity())return;
   const d=Object.fromEntries(new FormData(f)),c=calc(d.type);
-  const o={id:'ANG-'+Date.now().toString(36).toUpperCase().slice(-6),name:d.name.trim(),phone:d.phone,type:d.type,addr:d.addr||'',pay:d.pay,items:cart.map(i=>({...i})),c,at:new Date().toLocaleString('id-ID')};
+  const o={id:'ANG-'+Date.now().toString(36).toUpperCase().slice(-6),name:d.name.trim(),phone:phoneNorm(d.phone),type:d.type,addr:d.addr||'',pay:d.pay,items:cart.map(i=>({...i})),c,at:new Date().toLocaleString('id-ID')};
   try{localStorage.setItem('angkasa_last',JSON.stringify(o))}catch(x){}
   $('#okId').textContent=o.id;$('#okName').textContent=o.name;$('#okBody').innerHTML=rows(o.items);$('#okFoot').innerHTML=foot(c);
   $('#okType').textContent=TYPE[o.type]+(o.addr?' — '+o.addr:'');$('#okPay').textContent=PAY[o.pay][0]+': '+PAY[o.pay][1];

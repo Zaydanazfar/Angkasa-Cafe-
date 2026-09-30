@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/cart.css">
+<link rel="stylesheet" href="css/transitions.css">
 </head>
 <body>
 
@@ -179,7 +180,7 @@
   <form id="fCo" class="cx-bd cx-two" novalidate>
     <div>
       <label class="fld">Nama pelanggan<input name="name" required autocomplete="name" placeholder="Nama lengkap"></label>
-      <label class="fld">Nomor HP<input name="phone" type="tel" required pattern="(\+62|62|0)8[0-9]{8,12}" placeholder="0812xxxxxxxx" autocomplete="tel"></label>
+      <label class="fld">Nomor HP / WhatsApp<input name="phone" type="tel" inputmode="tel" required maxlength="18" placeholder="0812 3456 7890" autocomplete="tel" aria-describedby="phoneErr"><small class="hint" id="phoneErr" role="alert"></small></label>
       <label class="fld">Tipe pesanan<select name="type"><option value="dine">Makan di tempat</option><option value="pickup">Ambil sendiri</option><option value="delivery">Delivery (+Rp8.000)</option></select></label>
       <label class="fld" id="addrBox" hidden>Alamat pengiriman<textarea name="addr" rows="3" placeholder="Alamat lengkap"></textarea></label>
       <fieldset class="pay"><legend>Metode pembayaran</legend>
@@ -208,5 +209,6 @@
 
 <script src="js/script.js"></script>
 <script src="js/cart.js"></script>
+<script src="js/transitions.js"></script>
 </body>
 </html>
