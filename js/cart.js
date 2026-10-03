@@ -4,24 +4,24 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 const rp=n=>'Rp'+n.toLocaleString('id-ID');
 const KEY='angkasa_cart',CK='angkasa_coupon',TAX=.1,SHIP=8000;
 const M=[
-['k1','kopi','Espresso',15,'Shot tunggal pekat dengan crema tebal.',0,'espresso'],
-['k2','kopi','Americano',18,'Espresso dengan air, bersih dan segar.',0,'americano'],
-['k3','kopi','Kopi Susu Angkasa',24,'Signature kami: espresso, susu segar, dan gula aren.',1,'kopi-susu-angkasa'],
-['k4','kopi','Cappuccino',24,'Foam susu tebal dengan taburan cokelat.',0,'cappuccino'],
-['k5','kopi','Cafe Latte',20,'Lembut, creamy, dengan latte art.',0,'cafe-latte'],
-['k6','kopi','V60 Single Origin',28,'Seduh manual biji pilihan Nusantara.',0,'v60-single-origin'],
-['n1','non','Matcha Latte',26,'Matcha premium dengan susu dingin.',1,'matcha-latte'],
-['n2','non','Chocolate',22,'Cokelat pekat, dingin dan menyegarkan.',0,'chocolate'],
-['n3','non','Lemon Tea',18,'Teh dingin dengan perasan lemon.',0,'lemon-tea'],
-['n4','non','Teh Melati',16,'Teh melati harum, segar dengan es.',0,'teh-melati'],
-['n5','non','Jus Jeruk',20,'Jeruk segar dengan es dan daun mint.',0,'jus-jeruk'],
-['m1','makan','Butter Croissant',22,'Renyah di luar, lembut di dalam.',1,'croissant-butter'],
-['m2','makan','Nasi Goreng Angkasa',35,'Nasi goreng rempah dengan telur mata sapi.',0,'nasi-goreng-angkasa'],
-['m3','makan','Mie Goreng Spesial',30,'Mie goreng ayam, sayur, dan telur.',0,'mie-goreng-spesial'],
-['m4','makan','Roti Bakar Cokelat Keju',18,'Roti bakar dengan cokelat, keju, dan pisang.',0,'roti-bakar-cokelat-keju'],
-['m5','makan','Kentang Goreng',20,'Kentang goreng renyah dengan rosemary.',0,'kentang-goreng']
+['k1','kopi','Espresso Nova',15,'Shot tunggal pekat dengan crema tebal.',0,'espresso'],
+['k2','kopi','Americano Orbit',18,'Espresso dengan air, bersih dan segar.',0,'americano'],
+['k3','kopi','Kopi Susu Orbit',24,'Signature kami: espresso, susu segar, dan gula aren.',1,'kopi-susu-angkasa'],
+['k4','kopi','Cappuccino Nebula',24,'Foam susu tebal dengan taburan cokelat.',0,'cappuccino'],
+['k5','kopi','Latte Aurora',20,'Lembut, creamy, dengan latte art.',0,'cafe-latte'],
+['k6','kopi','V60 Pulsar',28,'Seduh manual biji pilihan Nusantara.',0,'v60-single-origin'],
+['n1','non','Matcha Galaxy',26,'Matcha premium dengan susu dingin.',1,'matcha-latte'],
+['n2','non','Cokelat Eclipse',22,'Cokelat pekat, dingin dan menyegarkan.',0,'chocolate'],
+['n3','non','Lemon Tea Solar',18,'Teh dingin dengan perasan lemon.',0,'lemon-tea'],
+['n4','non','Teh Melati Luna',16,'Teh melati harum, segar dengan es.',0,'teh-melati'],
+['n5','non','Jus Jeruk Mars',20,'Jeruk segar dengan es dan daun mint.',0,'jus-jeruk'],
+['m1','makan','Croissant Comet',22,'Renyah di luar, lembut di dalam.',1,'croissant-butter'],
+['m2','makan','Nasi Goreng Galaksi',35,'Nasi goreng rempah dengan telur mata sapi.',0,'nasi-goreng-angkasa'],
+['m3','makan','Mie Goreng Saturnus',30,'Mie goreng ayam, sayur, dan telur.',0,'mie-goreng-spesial'],
+['m4','makan','Roti Bakar Kosmos',18,'Roti bakar dengan cokelat, keju, dan pisang.',0,'roti-bakar-cokelat-keju'],
+['m5','makan','Kentang Goreng Asteroid',20,'Kentang goreng renyah dengan rosemary.',0,'kentang-goreng']
 ].map(([id,c,n,p,d,s,f])=>({id,c,n,p:p*1000,d,s,f}));
-const P=[['p1','Paket Angkasa',25,'kopi-susu-angkasa'],['p2','Weekend Special',45,'cafe-latte'],['p3','Bundling Makan Siang',45,'nasi-goreng-angkasa']].map(([id,n,p,f])=>({id,c:'promo',n,p:p*1000,f}));
+const P=[['p1','Morning Orbit',25,'kopi-susu-angkasa'],['p2','Double Galaxy',45,'cafe-latte'],['p3','Lunch in Space',45,'nasi-goreng-angkasa']].map(([id,n,p,f])=>({id,c:'promo',n,p:p*1000,f}));
 const by={};M.concat(P).forEach(x=>by[x.id]=x);
 const TYPE={dine:'Makan di tempat',pickup:'Ambil sendiri',delivery:'Delivery'};
 const PAY={qris:['QRIS','Kode QR dikirim admin lewat WhatsApp atau scan di kasir.'],transfer:['Transfer Bank','Transfer ke BCA 000-000-0000 a.n. Cafe Angkasa, cantumkan kode pesanan.'],ewallet:['E-Wallet','Kirim ke GoPay/OVO/DANA 0812-0000-0000 a.n. Cafe Angkasa.'],cash:['Bayar di Tempat','Bayar tunai di kasir atau saat pesanan tiba.']};
@@ -81,6 +81,9 @@ f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length)return;chkPho
   $('#okId').textContent=o.id;$('#okName').textContent=o.name;$('#okBody').innerHTML=rows(o.items);$('#okFoot').innerHTML=foot(c);
   $('#okType').textContent=TYPE[o.type]+(o.addr?' — '+o.addr:'');$('#okPay').textContent=PAY[o.pay][0]+': '+PAY[o.pay][1];
   const t=`Halo Cafe Angkasa, saya ingin konfirmasi pesanan ${o.id}\nNama: ${o.name}\nHP: ${o.phone}\nTipe: ${TYPE[o.type]}${o.addr?'\nAlamat: '+o.addr:''}\n`+o.items.map(i=>`- ${by[i.id].n} x${i.q}`).join('\n')+`\nTotal: ${rp(c.total)}\nPembayaran: ${PAY[o.pay][0]}`;
+  $('#okEta').textContent={dine:'10–15 menit',pickup:'10–15 menit',delivery:'25–40 menit'}[o.type];
+  $('#okLast').textContent={dine:'Diantar ke meja',pickup:'Siap diambil',delivery:'Dalam perjalanan'}[o.type];
+  $('#okPayNote').textContent=o.pay==='cash'?' dan siapkan pembayaran tunai':', lalu kirim bukti pembayaran di chat yang sama';
   $('#okWa').href='https://wa.me/6281200000000?text='+encodeURIComponent(t);
   cart=[];coupon='';save();dCo.close();render();dOk.showModal()});
 render();

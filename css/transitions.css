@@ -14,16 +14,16 @@
   html.js .reveal.in-view{opacity:1 !important;transform:none !important}
 
   /* Isi section: muncul berurutan (stagger) tiap kali section terlihat */
-  html.js .reveal:not(.in-view) :is(.grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.tabs,.btns>*,.info,.about-logo,.map){opacity:0}
-  html.js .reveal.in-view :is(.grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.tabs,.btns>*,.info,.about-logo,.map){
+  html.js .reveal:not(.in-view) :is(.grid>*,.promo-grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.tabs,.btns>*,.info,.about-logo,.map){opacity:0}
+  html.js .reveal.in-view :is(.grid>*,.promo-grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.tabs,.btns>*,.info,.about-logo,.map){
     animation:cx-rise 1s cubic-bezier(.22,.61,.36,1) both;
     animation-delay:calc(var(--i,0) * 130ms + 180ms);
   }
-  html.js .reveal :is(.grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(1){--i:0}
-  html.js .reveal :is(.grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(2){--i:1}
-  html.js .reveal :is(.grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(3){--i:2}
-  html.js .reveal :is(.grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(4){--i:3}
-  html.js .reveal :is(.grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(n+5){--i:4}
+  html.js .reveal :is(.grid>*,.promo-grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(1){--i:0}
+  html.js .reveal :is(.grid>*,.promo-grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(2){--i:1}
+  html.js .reveal :is(.grid>*,.promo-grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(3){--i:2}
+  html.js .reveal :is(.grid>*,.promo-grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(4){--i:3}
+  html.js .reveal :is(.grid>*,.promo-grid>*,.cards3>*,.gal>*,.facts>li,.cx-scroll,.btns>*,.info):nth-child(n+5){--i:4}
 
   @keyframes cx-rise{
     from{opacity:0;translate:0 28px;scale:.97}

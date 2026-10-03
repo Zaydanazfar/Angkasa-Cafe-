@@ -1,0 +1,32 @@
+/* Hiasan galaksi: bintang (canvas), aurora, planet. Dimuat setelah responsive.css */
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+section{position:relative;overflow-x:clip}
+section>.wrap,.foot>.wrap{position:relative;z-index:1}
+.planet{position:absolute;z-index:0;pointer-events:none;width:var(--s,160px);height:var(--s,160px);will-change:transform;animation:bob 11s ease-in-out infinite alternate}
+.planet .ball{position:absolute;inset:0;border-radius:50%}
+@keyframes bob{from{translate:0 -8px}to{translate:0 10px}}
+
+.planet.sat .ball{background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.38),transparent 42%),repeating-linear-gradient(172deg,#e6c99b 0 7%,#cfa66f 7% 12%,#f0dcb6 12% 19%,#b98a55 19% 24%,#dcb888 24% 30%);box-shadow:inset -34px -26px 56px rgba(10,5,0,.72),inset 8px 6px 20px rgba(255,240,210,.25),0 0 70px rgba(255,190,120,.16)}
+.planet.sat:before,.planet.sat:after{content:"";position:absolute;left:-62%;top:21%;width:224%;height:58%;border-radius:50%;transform:rotate(-16deg);border:9px solid rgba(232,210,170,.62);box-shadow:0 0 0 7px rgba(190,160,115,.28),0 0 0 15px rgba(210,185,140,.14),0 0 26px rgba(255,220,160,.22)}
+.planet.sat:after{clip-path:polygon(0 52%,100% 52%,100% 100%,0 100%)}
+.planet.blue .ball{background:repeating-linear-gradient(160deg,rgba(255,255,255,.11) 0 4%,transparent 4% 10%),radial-gradient(circle at 30% 28%,#a8dbff,#3a82e0 40%,#143a8c 72%,#071a4a);box-shadow:inset -30px -24px 50px rgba(0,0,20,.7),0 0 60px rgba(90,150,255,.32)}
+.planet.mars .ball{background:radial-gradient(ellipse 30% 10% at 50% 5%,rgba(255,255,255,.75),transparent),radial-gradient(circle at 60% 62%,rgba(60,15,5,.5) 0 12%,transparent 13%),radial-gradient(circle at 42% 72%,rgba(70,20,8,.4) 0 9%,transparent 10%),radial-gradient(circle at 32% 30%,#ffb089,#d9633a 38%,#8e2f17 72%,#3d1209);box-shadow:inset -26px -20px 44px rgba(20,0,0,.7),0 0 46px rgba(255,120,70,.2)}
+.planet.moon .ball{background:radial-gradient(circle at 35% 40%,rgba(0,0,0,.2) 0 8%,transparent 9%),radial-gradient(circle at 63% 30%,rgba(0,0,0,.16) 0 6%,transparent 7%),radial-gradient(circle at 56% 68%,rgba(0,0,0,.2) 0 11%,transparent 12%),radial-gradient(circle at 28% 72%,rgba(0,0,0,.16) 0 5%,transparent 6%),radial-gradient(circle at 32% 30%,#f3f3ef,#bdbdb8 45%,#6d6d6b 80%,#2c2c2e);box-shadow:inset -20px -16px 34px rgba(0,0,0,.68),0 0 40px rgba(220,230,255,.18)}
+
+/* Aurora (tema gelap) */
+.aurora{position:fixed;inset:0 0 auto 0;height:78vh;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.2s;overflow:hidden;-webkit-mask-image:linear-gradient(#000 0,#000 30%,transparent 100%);mask-image:linear-gradient(#000 0,#000 30%,transparent 100%)}
+html[data-theme=dark] .aurora{opacity:.9}
+.aurora i{position:absolute;left:-25%;width:150%;border-radius:50%;filter:blur(42px);mix-blend-mode:screen;transform-origin:50% 100%;animation:aur 16s ease-in-out infinite alternate}
+.aurora i:nth-child(1){top:-6%;height:46%;opacity:.55;background:linear-gradient(90deg,transparent,rgba(60,255,170,.7) 22%,rgba(70,200,255,.6) 50%,rgba(150,90,255,.55) 78%,transparent)}
+.aurora i:nth-child(2){top:8%;height:36%;opacity:.45;animation-duration:22s;animation-delay:-7s;background:linear-gradient(90deg,transparent,rgba(140,90,255,.6) 25%,rgba(60,240,200,.55) 60%,transparent)}
+.aurora i:nth-child(3){top:20%;height:26%;opacity:.35;animation-duration:27s;animation-delay:-12s;background:linear-gradient(90deg,transparent,rgba(80,200,255,.5) 35%,rgba(90,255,170,.5) 70%,transparent)}
+.aurora:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(150,255,210,.07) 0 2px,transparent 2px 26px);-webkit-mask-image:linear-gradient(transparent,#000 40%,transparent);mask-image:linear-gradient(transparent,#000 40%,transparent);animation:rays 9s ease-in-out infinite alternate}
+@keyframes aur{0%{transform:translateX(-7%) skewX(-12deg) scaleY(.85)}50%{transform:translateX(6%) skewX(9deg) scaleY(1.2)}100%{transform:translateX(-2%) skewX(-4deg) scaleY(1)}}
+@keyframes rays{from{opacity:.35;transform:translateX(-12px)}to{opacity:1;transform:translateX(14px)}}
+
+/* Tema gelap: bagian selang-seling transparan agar bintang & aurora terlihat */
+html[data-theme=dark] section.alt{background:rgba(12,15,38,.5)!important}
+html[data-theme=dark] .foot{background:rgba(7,9,26,.72)!important}
+
+@media(max-width:600px){.planet{scale:.55;opacity:.75}}
+@media(prefers-reduced-motion:reduce){.planet,.aurora i,.aurora:after{animation:none}}

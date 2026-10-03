@@ -1,0 +1,132 @@
+/* Cafe Angkasa — penyesuaian responsif (dimuat paling akhir; desain laptop tetap jadi acuan)
+   Breakpoint: ≤480 HP | 481–767 HP besar | 768–1023 tablet | ≥1024 laptop | ≥1600 desktop lebar */
+
+/* Pengaman global */
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:clip}
+img,video,iframe{max-width:100%}
+.hero{min-height:92vh;min-height:92svh}
+.hero-in{padding-top:40px;padding-bottom:84px}
+.info>div,.foot p,.lead{overflow-wrap:anywhere}
+.cx-scroll{-webkit-overflow-scrolling:touch}
+#toast{width:max-content;max-width:calc(100vw - 32px);text-align:center;bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+.cx-ft{padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px))}
+.cards3{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.facts{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+
+/* Desktop lebar: isi mengikuti lebar konten, tidak menempel di tepi layar */
+@media(min-width:1200px){.nav{padding-inline:max(24px,calc((100vw - 1120px)/2 + 22px))}}
+@media(min-width:1600px){.wrap{max-width:1240px}.nav{padding-inline:max(24px,calc((100vw - 1240px)/2 + 22px))}.grid{gap:24px}}
+
+/* Tablet & HP besar: menu produk 3 kolom di tablet, galeri tidak dipotong */
+@media(min-width:481px) and (max-width:1023px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+  .gal{grid-template-columns:1fr 1fr;grid-auto-rows:auto}
+  .gal figure{min-height:0;aspect-ratio:3/2}
+  .gal .g1{grid-column:1/-1;grid-row:auto}
+}
+@media(min-width:760px){.grid.sig{grid-template-columns:repeat(3,1fr)}}
+
+/* Navigasi: hamburger sampai 900px agar menu tablet tidak sesak */
+@media(min-width:821px) and (max-width:900px){
+  .burger{display:block}
+  .links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;padding:12px 20px 18px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .links.open{display:flex}.links a{padding:.7em 1em}
+}
+
+/* Layar sentuh (tablet & HP) */
+@media(max-width:900px){
+  .links{max-height:calc(100dvh - 70px);overflow-y:auto}
+  .links a{min-height:44px;display:flex;align-items:center}
+  .icon-btn{width:44px;height:44px}
+  .tab{min-height:44px}
+  .qty button{width:36px;height:36px}
+  .cx-x{min-width:44px;min-height:44px}
+  .cx-b{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  .del{padding:.4rem 0}
+  .brand{min-height:44px}
+  .foot-links a{display:inline-flex;align-items:center;min-height:44px}
+  .foot-links{gap:0 20px}
+  .coupon input,.fld input,.fld select,.fld textarea{font-size:16px;min-height:44px}
+  .fld textarea{min-height:88px}
+  fieldset.pay label{padding:.55rem 0}
+}
+
+/* HP */
+@media(max-width:767px){
+  .gal{grid-auto-rows:auto}
+  .gal figure{min-height:0;aspect-ratio:3/2}
+  .about{text-align:center}.about .facts{text-align:left}
+  .cx-modal{width:calc(100vw - 16px);max-height:94dvh}
+}
+
+/* HP kecil (320–480) */
+@media(max-width:480px){
+  section{padding:56px 0}
+  .wrap{padding:0 18px}
+  .nav{gap:8px;padding-left:14px;padding-right:14px}
+  .brand{gap:8px;font-size:1rem;min-width:0}.brand b{white-space:nowrap}
+  .logo-c{width:36px;height:36px}.tools{gap:6px}
+  .hero h1{font-size:clamp(2.1rem,10.5vw,2.6rem)}
+  .sub{font-size:1.02rem}
+  .hero .btns .btn,.contact .btns .btn{flex:1 1 100%;text-align:center}
+  .tabs{gap:6px}.tab{padding:.55em 1em}
+  .grid{gap:16px;margin-top:24px}
+  .about-logo{width:160px;height:160px}
+  .logo-c.big{width:88px;height:88px}
+  .facts{grid-template-columns:1fr}
+  .foot-top{flex-direction:column}.foot-links{max-width:none}
+  .cx-table th,.cx-table td{padding:.55rem .5rem}.cx-table{font-size:.88rem}
+  .thumb{width:36px;height:36px}.ln{gap:.45rem}
+  .cx-h,.cx-bd,.cx-ft{padding-left:.9rem;padding-right:.9rem}
+}
+@media(max-width:360px){.brand b{font-size:.92rem}.hero .eyebrow{letter-spacing:.14em}}
+
+/* HP landscape / layar pendek */
+@media(max-height:480px) and (orientation:landscape){.hero{min-height:auto}.hero-in{padding-top:56px;padding-bottom:72px}.cx-modal{max-height:100dvh}}
+
+/* ===== Perbaikan hasil audit ===== */
+/* Checkout: form tidak boleh melebar melebihi popup */
+.cx-two{grid-template-columns:minmax(0,1fr)}
+@media(min-width:800px){.cx-two{grid-template-columns:1fr 1fr}}
+.cx-two>*{min-width:0}
+.cx-dlg{max-width:100vw}
+
+/* Keranjang (laci ≤430px): tiap item jadi 2 baris agar Subtotal tidak terpotong */
+#dCart .cx-table,#dCart .cx-table tbody,#dCart .cx-table tfoot{display:block}
+#dCart .cx-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#dCart .cx-table tr{display:grid;grid-template-columns:1fr auto;align-items:center;gap:.45rem .8rem;padding:.8rem 0;border-bottom:1px solid var(--cx-line)}
+#dCart .cx-table th,#dCart .cx-table td{border:0;padding:0}
+#dCart #cBody th{grid-column:1/-1}
+#dCart #cBody td:last-child{text-align:right;font-weight:600}
+#dCart #cFoot tr{padding:.3rem 0;border:0}
+#dCart #cFoot tr.tot{border-top:1px solid var(--cx-line);margin-top:.3rem;padding-top:.7rem}
+#dCart .cx-table tbody tr:hover{background:none}
+
+/* Ringkasan pesanan di HP: item | qty | subtotal tetap muat */
+@media(max-width:480px){
+  :is(#dCo,#dOk) .cx-table,:is(#dCo,#dOk) .cx-table tbody,:is(#dCo,#dOk) .cx-table tfoot{display:block}
+  :is(#dCo,#dOk) .cx-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  :is(#dCo,#dOk) .cx-table tr{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:.4rem .7rem;padding:.6rem 0;border-bottom:1px solid var(--cx-line)}
+  :is(#dCo,#dOk) .cx-table th,:is(#dCo,#dOk) .cx-table td{border:0;padding:0}
+  :is(#dCo,#dOk) .cx-table tbody td:nth-child(2):before{content:"×"}
+  :is(#dCo,#dOk) .cx-table tfoot tr{padding:.3rem 0;border:0}
+  :is(#dCo,#dOk) .cx-table tfoot th{grid-column:1/3}
+  :is(#dCo,#dOk) .cx-table tfoot tr.tot{border-top:1px solid var(--cx-line);padding-top:.6rem}
+  .steps li{font-size:.68rem}
+}
+@media(max-height:480px) and (orientation:landscape){.hero-in{padding-bottom:92px}}
+@media(max-width:480px){.tabs{flex-wrap:nowrap;gap:6px}.tab{flex:1 1 auto;padding:.55em .7em;font-size:.9rem;text-align:center;white-space:nowrap}}
+@media(min-width:481px) and (max-width:1099px){.cards3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1023px){.foot-links{max-width:none;justify-content:flex-end}}
+@media(max-width:767px){.foot-links{justify-content:flex-start}}
+
+/* Tanpa tombol garis tiga: menu jadi baris yang bisa digeser di HP/tablet */
+.burger{display:none!important}
+@media(max-width:900px){
+  html{scroll-padding-top:112px}
+  .nav{flex-wrap:wrap;row-gap:2px}
+  .links{display:flex!important;position:static!important;order:3;flex:1 1 100%;flex-direction:row!important;gap:2px;padding:0 0 6px!important;background:none!important;border:0!important;max-height:none;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .links::-webkit-scrollbar{display:none}
+  .links a{flex:none;white-space:nowrap}
+}

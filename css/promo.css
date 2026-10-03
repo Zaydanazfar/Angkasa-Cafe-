@@ -1,0 +1,36 @@
+/* Kartu promo: foto latar, overlay gelap, badge, judul, harga & tombol di bawah */
+.promo-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;margin:36px 0 0}
+@media(min-width:640px){.promo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.promo-grid .pc:last-child:nth-child(odd){grid-column:1/-1}}
+@media(min-width:980px){.promo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.promo-grid .pc:last-child:nth-child(odd){grid-column:auto}}
+.pc{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;gap:1.6rem;min-height:420px;padding:clamp(1.2rem,2.4vw,1.8rem);border-radius:30px;overflow:hidden;color:#fff;background:#9ccdf0;box-shadow:var(--sh)}
+.pc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.pc:hover .pc-img{transform:scale(1.05)}
+.pc:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.35) 38%,rgba(0,0,0,0) 62%)}
+.pc-body{margin-top:auto}
+.pc-tag{display:inline-block;padding:.5em 1.1em;border-radius:999px;background:#8fb8ec;color:#12324f;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.pc-body,.pc-foot{text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.pc h3{margin:.9rem 0 .35rem;font-size:clamp(1.5rem,2.6vw,2rem);color:#fff}
+.pc p{margin:0;max-width:34ch;color:rgba(255,255,255,.78)}
+.pc small{display:block;margin-top:.5rem;color:rgba(255,255,255,.6);font-size:.82rem}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.1rem;border-top:1px solid rgba(255,255,255,.2)}
+.pc-foot b{font-size:clamp(1.1rem,2vw,1.35rem)}
+.pc .cx-b.pc-btn{background:#fff;color:#14202e;border-color:#fff;padding:.7em 1.4em;font-size:.95rem}
+.pc .cx-b.pc-btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.pc .cx-b.pc-btn:hover{opacity:.9}
+.promo-note{margin:1.2rem 0 0;color:var(--mut);font-size:.85rem}
+@media(max-width:480px){.pc{min-height:320px;border-radius:22px}}
+
+/* Kepala promo: judul besar + kotak kode */
+.promo-head{display:grid;gap:24px;align-items:end}
+@media(min-width:900px){.promo-head{grid-template-columns:1.8fr 1fr;gap:48px}}
+.promo-head h2{font-size:clamp(2.3rem,6vw,4.4rem);font-weight:500;line-height:1.05;max-width:13ch;margin:.3em 0 0}
+.promo .kicker,.promo-head .kicker{display:flex;align-items:center;gap:14px}
+.promo-head>div>.kicker:before{content:"";width:48px;height:1px;background:currentColor}
+.promo-box{border:1px solid var(--line);border-radius:22px;padding:1.5rem 1.7rem;background:var(--card)}
+.promo-box .kicker{margin:0}.promo-box p:not(.kicker){margin:.7rem 0 1rem;color:var(--mut)}.promo-box b{color:var(--fg)}
+.pc-body p{max-width:30ch}
+
+/* Judul promo lebih lebar/memanjang seperti referensi */
+.promo-head h2{max-width:none;letter-spacing:.012em;line-height:1.1;font-size:clamp(2.3rem,6.4vw,4.8rem)}
+@media(min-width:900px){.promo-head h2{max-width:17ch}}
+.pc-body{min-height:10.5rem}
