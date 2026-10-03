@@ -31,14 +31,17 @@ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(cart));localStorage.
 const calc=type=>{const sub=cart.reduce((s,i)=>s+by[i.id].p*i.q,0),disc=coupon==='BARU15'?Math.round(sub*.15):0,tax=Math.round((sub-disc)*TAX),ship=type==='delivery'&&sub?SHIP:0;return{sub,disc,tax,ship,total:sub-disc+tax+ship}};
 const rows=(items)=>items.map(i=>{const p=by[i.id];return`<tr><th scope="row"><div class="ln">${p.f?`<img class="thumb" src="gambar/menu/${p.f}.jpg" alt="" width="44" height="44">`:''}<span>${p.n}<small>${rp(p.p)}</small></span></div></th><td>${i.q}</td><td class="num">${rp(p.p*i.q)}</td></tr>`}).join('');
 const foot=c=>[['Subtotal',c.sub],c.disc&&['Diskon BARU15 (15%)',-c.disc],['Pajak 10%',c.tax],c.ship&&['Ongkos kirim',c.ship]].filter(Boolean).map(([l,v])=>`<tr><th scope="row" colspan="2">${l}</th><td class="num">${v<0?'−':''}${rp(Math.abs(v))}</td></tr>`).join('')+`<tr class="tot"><th scope="row" colspan="2">Total</th><td class="num">${rp(c.total)}</td></tr>`;
-const card=x=>`<article class="cx-card"><img class="ph" src="gambar/menu/${x.f}.jpg" alt="${x.n}" width="600" height="600" loading="lazy"><div><h3>${x.n}</h3>${x.s?'<span class="tag">Best Seller</span>':''}<p>${x.d}</p></div><div class="cx-row"><b>${rp(x.p)}</b><button class="cx-b" data-add="${x.id}">Pesan</button></div></article>`;
+const card=x=>`<article class="cx-card"><img class="ph" src="gambar/menu/${x.f}.jpg" alt="${x.n}" width="600" height="600" loading="lazy">${x.s?'<span class="tag">Best Seller</span>':''}<div><h3>${x.n}</h3><span class="cat">${CAT[x.c]}</span><p>${x.d}</p></div><div class="cx-row"><b>${rp(x.p)}</b><button class="add" data-add="${x.id}" aria-label="Tambah ${x.n} ke keranjang">+</button></div></article>`;
 
 /* ambil alih render menu (node dikloning agar handler lama script.js tidak bentrok) */
 const swap=n=>{const c=n.cloneNode(n.classList.contains('tab'));n.replaceWith(c);return c};
 const list=swap($('#list')),sig=swap($('#sig')),tabs=$$('.tab').map(swap);
-const showMenu=c=>{list.innerHTML=M.filter(x=>x.c===c).map(card).join('')};
-sig.innerHTML=M.filter(x=>x.s).map(card).join('');showMenu('kopi');
-tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(o=>o.setAttribute('aria-selected',o===t));showMenu(t.dataset.c)}));
+let cur='all',q='',more=false;const CAT={kopi:'Coffee',non:'Non-Coffee',makan:'Food'};
+const showMenu=()=>{const r=M.filter(x=>(cur==='all'||(cur==='fav'?x.s:x.c===cur))&&x.n.toLowerCase().includes(q)),lim=cur==='all'&&!q&&!more;list.innerHTML=r.slice(0,lim?10:99).map(card).join('')||'<p class="nores">Menu tidak ditemukan.</p>';$('#seeAll').hidden=!(lim&&r.length>10)};
+sig.innerHTML=M.filter(x=>x.s).map(card).join('');showMenu();
+tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(o=>o.setAttribute('aria-selected',o===t));cur=t.dataset.c;showMenu()}));
+$('#q').addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();showMenu()});
+$('#seeAll').onclick=()=>{more=true;showMenu()};
 
 const dCart=$('#dCart'),dCo=$('#dCo'),dOk=$('#dOk'),f=$('#fCo'),toastEl=$('#toast');
 let tt;const toast=m=>{toastEl.textContent=m;toastEl.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('on'),2200)};
