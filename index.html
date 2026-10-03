@@ -157,8 +157,8 @@
     <div>
       <div class="info"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><div><b>Alamat</b>Jl. Melawai 2, RT.3/RW.1, Melawai, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12160</div></div>
       <div class="info"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div><b>Jam buka</b>Senin - Jumat: 08.00 - 22.00<br>Sabtu - Minggu: 09.00 - 23.00</div></div>
-      <div class="info"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><div><b>WhatsApp</b>0878-5084-9009</div></div>
-      <div class="btns"><a class="btn solid" href="https://wa.me/6287850849009" target="_blank" rel="noopener">Chat WhatsApp</a><a class="btn line" href="https://www.instagram.com/angkasayeu_/" target="_blank" rel="noopener">Instagram</a><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=Jl.+Melawai+2,+Melawai,+Kebayoran+Baru,+Jakarta+Selatan+12160" target="_blank" rel="noopener">Buka di Maps</a></div>
+      <div class="info"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><div><b>WhatsApp</b>0812-0000-0000</div></div>
+      <div class="btns"><a class="btn solid" href="https://wa.me/6281200000000" target="_blank" rel="noopener">Chat WhatsApp</a><a class="btn line" href="https://www.instagram.com/angkasayeu_/" target="_blank" rel="noopener">Instagram</a><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=Jl.+Melawai+2,+Melawai,+Kebayoran+Baru,+Jakarta+Selatan+12160" target="_blank" rel="noopener">Buka di Maps</a></div>
     </div>
     <div class="map"><iframe title="Peta lokasi Cafe Angkasa" src="https://www.google.com/maps?q=Jl.+Melawai+2,+Melawai,+Kebayoran+Baru,+Jakarta+Selatan+12160&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
   </div>
@@ -169,7 +169,7 @@
   <div class="foot-top">
     <div><b class="foot-brand">Cafe Angkasa</b><p>A little space for you.</p></div>
     <nav class="foot-links" aria-label="Footer">
-      <a href="https://www.instagram.com/angkasayeu_/" target="_blank" rel="noopener">Instagram</a><a href="https://wa.me/6287850849009" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.instagram.com/angkasayeu_/" target="_blank" rel="noopener">Instagram</a><a href="https://wa.me/6281200000000" target="_blank" rel="noopener">WhatsApp</a>
       <a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
   </div>
@@ -177,50 +177,41 @@
 </div></footer>
 
 <dialog id="dCart" class="cx-dlg cx-drawer" aria-label="Keranjang">
-  <div class="cx-h"><h2>Keranjang</h2><button class="cx-x" data-close aria-label="Tutup">×</button></div>
+  <div class="cx-h"><div><p class="kick">Pesananmu</p><h2>Keranjang</h2></div><button class="cx-x" data-close aria-label="Tutup">×</button></div>
   <div class="cx-bd">
     <div class="empty" id="cEmpty"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span><p>Keranjang masih kosong.</p><a class="cx-b" href="#menu" data-close>Lihat Menu</a></div>
     <div id="cFull" hidden>
-      <table class="cx-table"><caption class="sr">Daftar item keranjang</caption><thead><tr><th scope="col">Item</th><th scope="col">Jumlah</th><th scope="col" class="num">Subtotal</th></tr></thead><tbody id="cBody"></tbody><tfoot id="cFoot"></tfoot></table>
+      <table class="cx-table"><caption class="sr">Daftar item keranjang</caption><thead><tr><th scope="col">Item</th><th scope="col">Jumlah</th><th scope="col" class="num">Subtotal</th></tr></thead><tbody id="cBody"></tbody></table>
       <div class="coupon"><input id="code" placeholder="Kode promo (BARU15)" aria-label="Kode promo"><button class="cx-b ghost" id="codeBtn" type="button">Pakai</button></div>
-      <p><button class="del" id="cClear" type="button">Kosongkan keranjang</button></p>
     </div>
   </div>
-  <div class="cx-ft"><button class="cx-b" id="cGo" type="button" disabled>Checkout / Bayar Sekarang</button></div>
+  <div class="cx-ft"><table class="cx-table sumt"><caption class="sr">Total pesanan</caption><tbody id="cFoot"></tbody></table><button class="cx-b big" id="cGo" type="button" disabled>Checkout sekarang <span aria-hidden="true">→</span></button><button class="del" id="cClear" type="button">Kosongkan keranjang</button></div>
 </dialog>
 
-<dialog id="dCo" class="cx-dlg cx-modal" aria-label="Checkout">
-  <div class="cx-h"><h2>Checkout</h2><button class="cx-x" data-close aria-label="Tutup">×</button></div>
+<dialog id="dCo" class="cx-dlg cx-modal cx-co" aria-label="Checkout">
+  <div class="cx-h"><div><p class="kick">Satu langkah lagi</p><h2>Checkout</h2></div><button class="cx-x" data-close aria-label="Tutup">×</button></div>
   <form id="fCo" class="cx-bd cx-two" novalidate>
     <div>
-      <label class="fld">Nama pelanggan<input name="name" required autocomplete="name" placeholder="Nama lengkap"></label>
-      <label class="fld">Nomor HP / WhatsApp<input name="phone" type="tel" inputmode="tel" required maxlength="18" placeholder="087850849009" autocomplete="tel" aria-describedby="phoneErr"><small class="hint" id="phoneErr" role="alert"></small></label>
-      <label class="fld">Tipe pesanan<select name="type"><option value="dine">Makan di tempat</option><option value="pickup">Ambil sendiri</option><option value="delivery">Delivery (+Rp8.000)</option></select></label>
+      <div class="r2">
+        <label class="fld">Nama pelanggan<input name="name" required autocomplete="name" placeholder="Nama lengkap"></label>
+        <label class="fld">Nomor WhatsApp<input name="phone" type="tel" inputmode="tel" required maxlength="18" placeholder="08xxxxxxxxxx" autocomplete="tel" aria-describedby="phoneErr"><small class="hint" id="phoneErr" role="alert"></small></label>
+      </div>
+      <fieldset class="opt"><legend>Tipe pesanan</legend><div class="og o3"><label><input type="radio" name="type" value="dine" checked><span>Makan di tempat</span></label><label><input type="radio" name="type" value="pickup"><span>Ambil sendiri</span></label><label><input type="radio" name="type" value="delivery"><span>Delivery<small>+Rp8.000</small></span></label></div></fieldset>
+      <label class="fld" id="tableBox">Nomor meja<input name="table" required maxlength="4" pattern="[A-Za-z0-9]{1,4}" placeholder="Contoh: 12" autocomplete="off" title="Isi nomor meja, contoh: 12 atau A3"></label>
       <label class="fld" id="addrBox" hidden>Alamat pengiriman<textarea name="addr" rows="3" placeholder="Alamat lengkap"></textarea></label>
-      <fieldset class="pay"><legend>Metode pembayaran</legend>
-        <label><input type="radio" name="pay" value="qris" checked> QRIS</label>
-        <label><input type="radio" name="pay" value="transfer"> Transfer Bank</label>
-        <label><input type="radio" name="pay" value="ewallet"> E-Wallet (GoPay / OVO / DANA)</label>
-        <label><input type="radio" name="pay" value="cash"> Bayar di Tempat</label>
-      </fieldset>
+      <fieldset class="opt"><legend>Metode pembayaran</legend><div class="og o2"><label><input type="radio" name="pay" value="qris" checked><span>QRIS</span></label><label><input type="radio" name="pay" value="transfer"><span>Transfer Bank</span></label><label><input type="radio" name="pay" value="ewallet"><span>E-Wallet</span></label><label><input type="radio" name="pay" value="cash"><span>Bayar di Tempat</span></label></div></fieldset>
     </div>
-    <div>
-      <table class="cx-table"><caption>Ringkasan pesanan</caption><thead><tr><th scope="col">Item</th><th scope="col">Qty</th><th scope="col" class="num">Subtotal</th></tr></thead><tbody id="coBody"></tbody><tfoot id="coFoot"></tfoot></table>
-      <p><button class="cx-b" type="submit" style="width:100%">Bayar <span id="coPay"></span></button></p>
-    </div>
+    <aside class="sumc"><h3>Ringkasan</h3><ul class="ls" id="coBody"></ul><ul class="ls f" id="coFoot"></ul><button class="cx-b big" type="submit">Bayar <span id="coPay"></span></button><p class="fine">Dengan melanjutkan, Anda menyetujui rincian pesanan di atas.</p></aside>
   </form>
 </dialog>
 
-<dialog id="dOk" class="cx-dlg cx-modal" aria-label="Pesanan berhasil">
-  <div class="ok"><div class="chk">✓</div><h2>Terima kasih sudah memesan!</h2><p>Pesanan atas nama <b id="okName"></b> sudah dicatat.<br>Kode pesanan: <code id="okId"></code></p></div>
+<dialog id="dOk" class="cx-dlg cx-modal cx-ok" aria-label="Pesanan berhasil">
+  <div class="ok"><div class="chk">✓</div><p class="kick">Pesanan berhasil</p><h2>Terima kasih, <span id="okName"></span>.</h2><p>Kode pesanan Anda <b id="okId"></b>. Kirim detail ke WhatsApp agar tim kami segera menyiapkannya.</p></div>
   <div class="cx-bd">
-    <div class="alert-wa"><b>Langkah terakhir:</b> tekan tombol <b>Kirim ke WhatsApp</b> di bawah agar kasir kami menerima pesanan Anda<span id="okPayNote"></span>. Mohon tunggu pesanan Anda ya.</div>
-    <ol class="steps" aria-label="Status pesanan"><li class="done">Pesanan dicatat</li><li class="now">Kirim ke WhatsApp</li><li>Diproses barista</li><li id="okLast">Siap</li></ol>
-    <p class="eta">⏱ Estimasi waktu: <b id="okEta"></b> setelah pesanan dikonfirmasi</p>
-    <table class="cx-table"><caption>Rincian pesanan</caption><thead><tr><th scope="col">Item</th><th scope="col">Qty</th><th scope="col" class="num">Subtotal</th></tr></thead><tbody id="okBody"></tbody><tfoot id="okFoot"></tfoot></table>
-    <div class="note"><b>Tipe:</b> <span id="okType"></span><br><b>Pembayaran —</b> <span id="okPay"></span></div>
+    <dl class="sum"><div><dt>Tipe</dt><dd id="okType"></dd></div><div><dt>Pembayaran</dt><dd id="okPay"></dd></div><div class="tot"><dt>Total</dt><dd id="okTotal"></dd></div></dl>
+    <p class="paynote" id="okPayNote"></p>
   </div>
-  <div class="cx-ft"><a class="cx-b" id="okWa" target="_blank" rel="noopener">Kirim ke WhatsApp</a><button class="cx-b ghost" data-close type="button">Selesai</button></div>
+  <div class="cx-ft"><a class="cx-b big" id="okWa" target="_blank" rel="noopener">Kirim detail ke WhatsApp</a><button class="cx-b link" data-close type="button">Selesai</button></div>
 </dialog>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol><symbol id="i-cup" viewBox="0 0 24 24"><path d="M10 2v2M14 2v2M6 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1"/></symbol><symbol id="i-img" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol></svg>
 <div class="dr-bg" data-dr-close></div>
