@@ -24,7 +24,7 @@ const M=[
 const P=[['p1','Morning Orbit',25,'kopi-susu-angkasa'],['p2','Double Galaxy',45,'cafe-latte'],['p3','Lunch in Space',45,'nasi-goreng-angkasa']].map(([id,n,p,f])=>({id,c:'promo',n,p:p*1000,f}));
 const by={};M.concat(P).forEach(x=>by[x.id]=x);
 const TYPE={dine:'Makan di tempat',pickup:'Ambil sendiri',delivery:'Delivery'};
-const PAY={qris:['QRIS','Kode QR dikirim admin lewat WhatsApp atau scan di kasir.'],transfer:['Transfer Bank','Transfer ke BCA 000-000-0000 a.n. Cafe Angkasa, cantumkan kode pesanan.'],ewallet:['E-Wallet','Kirim ke GoPay/OVO/DANA 0812-0000-0000 a.n. Cafe Angkasa.'],cash:['Bayar di Tempat','Bayar tunai di kasir atau saat pesanan tiba.']};
+const PAY={qris:['QRIS','Kode QR dikirim admin lewat WhatsApp atau scan di kasir.'],transfer:['Transfer Bank','Transfer ke BCA 000-000-0000 a.n. Cafe Angkasa, cantumkan kode pesanan.'],ewallet:['E-Wallet','Kirim ke GoPay/OVO/DANA 087850849009 a.n. Cafe Angkasa.'],cash:['Bayar di Tempat','Bayar tunai di kasir atau saat pesanan tiba.']};
 let cart=[],coupon='';
 try{cart=(JSON.parse(localStorage.getItem(KEY))||[]).filter(i=>by[i.id]&&i.q>0);coupon=localStorage.getItem(CK)||''}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(cart));localStorage.setItem(CK,coupon)}catch(e){}};
@@ -87,7 +87,7 @@ f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length)return;chkPho
   $('#okEta').textContent={dine:'10–15 menit',pickup:'10–15 menit',delivery:'25–40 menit'}[o.type];
   $('#okLast').textContent={dine:'Diantar ke meja',pickup:'Siap diambil',delivery:'Dalam perjalanan'}[o.type];
   $('#okPayNote').textContent=o.pay==='cash'?' dan siapkan pembayaran tunai':', lalu kirim bukti pembayaran di chat yang sama';
-  $('#okWa').href='https://wa.me/6281200000000?text='+encodeURIComponent(t);
+  $('#okWa').href='https://wa.me/6287850849009?text='+encodeURIComponent(t);
   cart=[];coupon='';save();dCo.close();render();dOk.showModal()});
 render();
 })();
