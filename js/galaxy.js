@@ -13,7 +13,7 @@ let tick=false;const par=()=>{tick=false;const h=innerHeight/2;pl.forEach(p=>{co
 addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(par)}},{passive:true});par();
 /* bintang */
 const cv=document.createElement('canvas');cv.id='sky';cv.setAttribute('aria-hidden','true');document.body.prepend(cv);
-const cx=cv.getContext('2d');let W,H,D,stars=[],shoot=[],nextShoot=2500;
+const cx=cv.getContext('2d');let W,H,D,stars=[],shoot=[],nextShoot=1200;
 const glow=document.createElement('canvas');glow.width=glow.height=32;{const g=glow.getContext('2d'),r=g.createRadialGradient(16,16,0,16,16,16);r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(.25,'rgba(255,255,255,.45)');r.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=r;g.fillRect(0,0,32,32)}
 const TINT=['255,255,255','205,225,255','255,236,205','190,205,255'];
 function size(){D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;cx.setTransform(D,0,0,D,0,0);
@@ -23,7 +23,7 @@ function frame(t){const dark=root.dataset.theme==='dark',k=1;cx.clearRect(0,0,W,
   for(const s of stars){if(!dark&&s.z<.35)continue;const y=((s.y-sy*s.z*.18)%H+H)%H,tw=reduce?1:.55+.45*Math.sin(t/1000*s.sp+s.ph),a=s.a*tw*k;
     if(s.r>1.5){cx.globalAlpha=a*.9;const g=s.r*7;cx.drawImage(glow,s.x-g/2,y-g/2,g,g)}
     cx.globalAlpha=a;cx.fillStyle='rgb('+s.c+')';cx.beginPath();cx.arc(s.x,y,s.r,0,6.283);cx.fill()}
-  if(!reduce&&dark){if(t>nextShoot){nextShoot=t+4000+Math.random()*6000;const a=.55+Math.random()*.25;shoot.push({x:Math.random()*W*.9+W*.1,y:Math.random()*H*.45,vx:-Math.cos(a)*(9+Math.random()*5),vy:Math.sin(a)*(9+Math.random()*5),l:0})}
+  if(!reduce&&dark){if(t>nextShoot){nextShoot=t+1800+Math.random()*2700;const a=.55+Math.random()*.25;shoot.push({x:Math.random()*W*.9+W*.1,y:Math.random()*H*.45,vx:-Math.cos(a)*(9+Math.random()*5),vy:Math.sin(a)*(9+Math.random()*5),l:0})}
     for(let i=shoot.length-1;i>=0;i--){const s=shoot[i];s.x+=s.vx;s.y+=s.vy;s.l++;const al=Math.max(0,1-s.l/55),tx=s.x-s.vx*7,ty=s.y-s.vy*7,g=cx.createLinearGradient(s.x,s.y,tx,ty);g.addColorStop(0,'rgba(255,255,255,'+al+')');g.addColorStop(1,'rgba(150,180,255,0)');cx.globalAlpha=1;cx.strokeStyle=g;cx.lineWidth=1.6;cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(tx,ty);cx.stroke();if(s.l>55)shoot.splice(i,1)}}
   cx.globalAlpha=1;if(!reduce)requestAnimationFrame(frame)}
 requestAnimationFrame(frame);
