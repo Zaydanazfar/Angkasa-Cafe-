@@ -85,7 +85,7 @@ f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length)return;chkPho
   $('#okId').textContent=o.id;$('#okName').textContent=o.name;$('#okTotal').textContent=rp(c.total);
   $('#okType').textContent=TYPE[o.type]+(o.table?' — Meja '+o.table:'')+(o.addr?' — '+o.addr:'');$('#okPay').textContent=PAY[o.pay][0];$('#okPayNote').textContent=PAY[o.pay][1];
   const t=`Halo Cafe Angkasa, saya ingin konfirmasi pesanan ${o.id}\nNama: ${o.name}\nHP: ${o.phone}\nTipe: ${TYPE[o.type]}${o.table?'\nNo. meja: '+o.table:''}${o.addr?'\nAlamat: '+o.addr:''}\n`+o.items.map(i=>`- ${by[i.id].n} x${i.q}`).join('\n')+`\nTotal: ${rp(c.total)}\nPembayaran: ${PAY[o.pay][0]}`;
-  $('#okWa').href='https://wa.me/6281200000000?text='+encodeURIComponent(t);
+  $('#okWa').href='https://wa.me/6287850849009?text='+encodeURIComponent(t);
   cart=[];coupon='';save();dCo.close();render();dOk.showModal()});
 render();
 })();
