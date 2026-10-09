@@ -208,11 +208,16 @@
       <label class="fld">Tipe pesanan<select name="type"><option value="dine">Makan di tempat</option><option value="pickup">Ambil sendiri</option><option value="delivery">Delivery (+Rp8.000)</option></select></label>
       <label class="fld" id="addrBox" hidden>Alamat pengiriman<textarea name="addr" rows="3" placeholder="Alamat lengkap"></textarea></label>
       <fieldset class="pay"><legend>Metode pembayaran</legend>
-        <label class="pay-row"><input type="radio" name="pay" value="qris" checked><span class="pl"><svg viewBox="0 0 64 40" aria-hidden="true"><rect width="64" height="40" rx="7" fill="#fff"/><text x="32" y="25" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="15" letter-spacing=".5"><tspan fill="#e31e24">QR</tspan><tspan fill="#1b1b1b">IS</tspan></text><path d="M8 8h7v2H10v5H8zM56 8h-7v2h5v5h2zM8 32h7v-2H10v-5H8zM56 32h-7v-2h5v-5h2z" fill="#e31e24"/></svg></span><span class="pn">QRIS<small>Scan dengan aplikasi apa pun</small></span></label>
-        <label class="pay-row"><input type="radio" name="pay" value="transfer"><span class="pl"><svg viewBox="0 0 64 40" aria-hidden="true"><rect width="64" height="40" rx="7" fill="#0060af"/><text x="32" y="26" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="19" fill="#fff">BCA</text></svg></span><span class="pn">Transfer Bank<small>BCA</small></span></label>
-        <label class="pay-row"><input type="radio" name="pay" value="ewallet"><span class="pl"><svg viewBox="0 0 64 40" aria-hidden="true"><rect width="64" height="40" rx="7" fill="#fff"/><text x="32" y="26" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="15" fill="#00aed6">gopay</text></svg><svg viewBox="0 0 64 40" aria-hidden="true"><rect width="64" height="40" rx="7" fill="#4c2a86"/><text x="32" y="26" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="18" fill="#fff">OVO</text></svg><svg viewBox="0 0 64 40" aria-hidden="true"><rect width="64" height="40" rx="7" fill="#118eea"/><text x="32" y="26" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="16" fill="#fff">DANA</text></svg></span><span class="pn">E-Wallet<small>GoPay / OVO / DANA</small></span></label>
+        <label class="pay-row"><input type="radio" name="pay" value="qris" checked><span class="pn">QRIS<small>Scan dengan aplikasi apa pun</small></span></label>
+        <label class="pay-row"><input type="radio" name="pay" value="transfer"><span class="pl"><img src="gambar/pay/bca.webp" alt="BCA" width="200" height="125" loading="lazy" decoding="async"><img src="gambar/pay/mandiri.webp" alt="Mandiri" width="200" height="125" loading="lazy" decoding="async"></span><span class="pn">Transfer Bank<small>BCA / Mandiri</small></span></label>
+        <label class="pay-row"><input type="radio" name="pay" value="ewallet"><span class="pl"><img src="gambar/pay/gopay.webp" alt="GoPay" width="200" height="125" loading="lazy" decoding="async"><img src="gambar/pay/ovo.webp" alt="OVO" width="200" height="125" loading="lazy" decoding="async"><img src="gambar/pay/dana.webp" alt="DANA" width="200" height="125" loading="lazy" decoding="async"></span><span class="pn">E-Wallet<small>GoPay / OVO / DANA</small></span></label>
+        <label class="pay-row"><input type="radio" name="pay" value="card"><span class="pl"><svg viewBox="0 0 64 40" aria-label="Visa"><rect width="64" height="40" rx="7" fill="#fff"/><text x="32" y="27" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-style="italic" font-size="19" fill="#1a1f71">VISA</text></svg><svg viewBox="0 0 64 40" aria-label="Mastercard"><rect width="64" height="40" rx="7" fill="#fff"/><clipPath id="mcc"><circle cx="26" cy="20" r="11"/></clipPath><circle cx="26" cy="20" r="11" fill="#eb001b"/><circle cx="38" cy="20" r="11" fill="#f79e1b"/><circle cx="38" cy="20" r="11" fill="#ff5f00" clip-path="url(#mcc)"/></svg></span><span class="pn">Kartu Kredit<small>Visa / Mastercard</small></span></label>
         <label class="pay-row"><input type="radio" name="pay" value="cash"><span class="pl"><svg viewBox="0 0 64 40" aria-hidden="true"><rect width="64" height="40" rx="7" fill="#e8f6ee"/><rect x="10" y="10" width="44" height="20" rx="3" fill="#2e9e5b"/><circle cx="32" cy="20" r="6" fill="none" stroke="#d6f5e1" stroke-width="2"/><circle cx="16" cy="20" r="2" fill="#d6f5e1"/><circle cx="48" cy="20" r="2" fill="#d6f5e1"/></svg></span><span class="pn">Bayar di Tempat<small>Tunai di kasir</small></span></label>
       </fieldset>
+      <div class="card-box" id="cardBox" hidden>
+        <label class="fld">Nomor kartu kredit<input id="cardNo" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="23" placeholder="1234 5678 9012 3456"><small class="hint" id="cardErr" role="alert"></small></label>
+        <p class="card-note">Hanya Visa dan Mastercard. Demo: nomor kartu hanya diperiksa di perangkat Anda, tidak disimpan dan tidak dikirim.</p>
+      </div>
     </div>
     <div>
       <table class="cx-table"><caption>Ringkasan pesanan</caption><thead><tr><th scope="col">Item</th><th scope="col">Qty</th><th scope="col" class="num">Subtotal</th></tr></thead><tbody id="coBody"></tbody><tfoot id="coFoot"></tfoot></table>
@@ -238,7 +243,9 @@
 <script src="js/script.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/transitions.js"></script>
+<script src="js/earth-tex.js"></script>
 <script src="js/galaxy.js"></script>
+<script src="js/planets.js"></script>
 <script src="js/scenery.js"></script>
 <script src="js/app.js"></script>
 </body>

@@ -35,7 +35,12 @@ html[data-theme=dark] .foot{background:rgba(7,9,26,.72)!important}
 
 .planet.paused,.planet.paused .ball:before{animation-play-state:paused}
 
-/* Bumi (foto NASA Blue Marble, dirender sebagai bola) mengintip dari tepi bawah section */
-.space{--es:min(100vw,700px);padding-bottom:calc(var(--es)*.33 + 36px)}
-.planet.earth.big{width:var(--es);height:var(--es);left:50%;margin-left:calc(var(--es)/-2);bottom:calc(var(--es)*-.6);top:auto}
-.planet.earth.big img{display:block;width:100%;height:100%;user-select:none}
+/* Planet WebGL (berputar) */
+.planet .ball.gl{display:block;width:100%;height:100%;background:none!important;border-radius:50%}
+.planet.sat .ball.gl{box-shadow:0 0 70px rgba(255,190,120,.18)}
+.planet.moon .ball.gl{box-shadow:0 0 40px rgba(220,230,255,.2)}
+/* Bumi besar mengintip dari tepi bawah section */
+.space{--ed:min(80vw,560px);padding-bottom:calc(var(--ed)*.42 + 36px)}
+.planet.earth.big{width:var(--ed);height:var(--ed);left:50%;margin-left:calc(var(--ed)/-2);bottom:calc(var(--ed)*-.625);top:auto}
+.planet.earth.big .ball.gl{box-shadow:0 -4px 36px 6px rgba(110,190,255,.55),0 -14px 100px 18px rgba(60,130,255,.3)}
+.planet.paused{animation-play-state:paused}

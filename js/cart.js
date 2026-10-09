@@ -24,7 +24,7 @@ const M=[
 const P=[['p1','Morning Orbit',25,'kopi-susu-angkasa'],['p2','Double Galaxy',45,'cafe-latte'],['p3','Lunch in Space',45,'nasi-goreng-angkasa']].map(([id,n,p,f])=>({id,c:'promo',n,p:p*1000,f}));
 const by={};M.concat(P).forEach(x=>by[x.id]=x);window.angkasaMenuData=M;
 const TYPE={dine:'Makan di tempat',pickup:'Ambil sendiri',delivery:'Delivery'};
-const PAY={qris:['QRIS','Kode QR dikirim admin lewat WhatsApp atau scan di kasir.'],transfer:['Transfer Bank','Transfer ke BCA 000-000-0000 a.n. Cafe Angkasa, cantumkan kode pesanan.'],ewallet:['E-Wallet','Kirim ke GoPay/OVO/DANA 0812-0000-0000 a.n. Cafe Angkasa.'],cash:['Bayar di Tempat','Bayar tunai di kasir atau saat pesanan tiba.']};
+const PAY={qris:['QRIS','Kode QR dikirim admin lewat WhatsApp atau scan di kasir.'],transfer:['Transfer Bank','Transfer ke BCA 000-000-0000 atau Mandiri 000-0000-0000-0 a.n. Cafe Angkasa, cantumkan kode pesanan.'],ewallet:['E-Wallet','Kirim ke GoPay/OVO/DANA 0812-0000-0000 a.n. Cafe Angkasa.'],cash:['Bayar di Tempat','Bayar tunai di kasir atau saat pesanan tiba.'],card:['Kartu Kredit','Admin akan mengirim tautan pembayaran yang aman lewat WhatsApp.']};
 let cart=[],coupon='';
 try{cart=(JSON.parse(localStorage.getItem(KEY))||[]).filter(i=>by[i.id]&&i.q>0);coupon=localStorage.getItem(CK)||''}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(cart));localStorage.setItem(CK,coupon)}catch(e){}};
@@ -84,6 +84,16 @@ $('#cClear').onclick=()=>{cart=[];coupon='';save();render()};
 $('#codeBtn').onclick=()=>{const v=$('#code').value.trim().toUpperCase();if(!v){coupon='';save();return render()}if(v!=='BARU15')return toast('Kode tidak valid');coupon=v;save();render();toast('Kode BARU15 dipakai ✓')};
 const addr=()=>{const d=f.type.value==='delivery';$('#addrBox').hidden=!d;f.addr.required=d;sumCo()};
 f.type.addEventListener('change',addr);
+/* Kartu kredit: hanya Visa/Mastercard, cek Luhn. Nomor tidak disimpan/dikirim. */
+const cardBox=$('#cardBox'),cardNo=$('#cardNo'),cardErr=$('#cardErr');
+const luhn=n=>{let s=0,a=false;for(let i=n.length-1;i>=0;i--){let d=+n[i];if(a){d*=2;if(d>9)d-=9}s+=d;a=!a}return s%10===0};
+const brandOk=n=>/^4/.test(n)||/^(5[1-5]|2(2[2-9]|[3-6]\d|7[01]|720))/.test(n);
+const chkCard=()=>{if(f.pay.value!=='card'){cardErr.textContent='';cardNo.classList.remove('bad');return true}
+  const n=cardNo.value.replace(/\D/g,'');const m=n.length<13?'Nomor kartu belum lengkap.':!brandOk(n)?'Hanya kartu Visa atau Mastercard.':!luhn(n)?'Nomor kartu tidak valid.':'';
+  cardErr.textContent=m;cardNo.classList.toggle('bad',!!m);if(m)cardNo.focus();return !m};
+f.addEventListener('change',e=>{if(e.target.name==='pay'){cardBox.hidden=e.target.value!=='card';if(!cardBox.hidden)cardNo.focus();else chkCard()}});
+cardNo.addEventListener('input',()=>{cardNo.value=cardNo.value.replace(/\D/g,'').slice(0,19).replace(/(.{4})/g,'$1 ').trim();cardErr.textContent='';cardNo.classList.remove('bad')});
+f.addEventListener('reset',()=>{cardBox.hidden=true;cardErr.textContent='';cardNo.classList.remove('bad')});
 /* Nomor HP: boleh diketik dengan spasi/strip/+62, otomatis dirapikan jadi 08xxxxxxxxxx */
 const ph=f.phone,phErr=$('#phoneErr');
 const phoneNorm=v=>{let d=String(v).replace(/\D/g,'');if(d.startsWith('62'))d='0'+d.slice(2);else if(d.startsWith('8'))d='0'+d;return d};
@@ -92,16 +102,16 @@ const chkPhone=show=>{const n=phoneNorm(ph.value),empty=!ph.value.trim(),ok=/^08
   ph.setCustomValidity(msg);if(show){phErr.textContent=msg;ph.classList.toggle('bad',!!msg)}return ok};
 ph.addEventListener('input',()=>{ph.value=ph.value.replace(/[^\d+\s-]/g,'');chkPhone(ph.classList.contains('bad'))});
 ph.addEventListener('blur',()=>{if(ph.value.trim())chkPhone(true)});
-f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length)return;chkPhone(true);if(!f.reportValidity())return;
+f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length)return;chkPhone(true);if(!f.reportValidity())return;if(!chkCard())return;const last4=cardNo.value.replace(/\D/g,'').slice(-4);
   const d=Object.fromEntries(new FormData(f)),c=calc(d.type);
   const o={id:'ANG-'+Date.now().toString(36).toUpperCase().slice(-6),name:d.name.trim(),phone:phoneNorm(d.phone),type:d.type,addr:d.addr||'',pay:d.pay,items:cart.map(i=>({...i})),c,at:new Date().toLocaleString('id-ID')};
   try{localStorage.setItem('angkasa_last',JSON.stringify(o))}catch(x){}
   $('#okId').textContent=o.id;$('#okName').textContent=o.name;$('#okBody').innerHTML=rows(o.items);$('#okFoot').innerHTML=foot(c);
-  $('#okType').textContent=TYPE[o.type]+(o.addr?' — '+o.addr:'');$('#okPay').textContent=PAY[o.pay][0]+': '+PAY[o.pay][1];
+  $('#okType').textContent=TYPE[o.type]+(o.addr?' — '+o.addr:'');$('#okPay').textContent=PAY[o.pay][0]+(o.pay==='card'&&last4?' •••• '+last4:'')+': '+PAY[o.pay][1];
   const t=`Halo Cafe Angkasa, saya ingin konfirmasi pesanan ${o.id}\nNama: ${o.name}\nHP: ${o.phone}\nTipe: ${TYPE[o.type]}${o.addr?'\nAlamat: '+o.addr:''}\n`+o.items.map(i=>`- ${by[i.id].n} x${i.q}`).join('\n')+`\nTotal: ${rp(c.total)}\nPembayaran: ${PAY[o.pay][0]}`;
   $('#okEta').textContent={dine:'10–15 menit',pickup:'10–15 menit',delivery:'25–40 menit'}[o.type];
   $('#okLast').textContent={dine:'Diantar ke meja',pickup:'Siap diambil',delivery:'Dalam perjalanan'}[o.type];
-  $('#okPayNote').textContent=o.pay==='cash'?' dan siapkan pembayaran tunai':', lalu kirim bukti pembayaran di chat yang sama';
+  $('#okPayNote').textContent=o.pay==='cash'?' dan siapkan pembayaran tunai':o.pay==='card'?', lalu tunggu tautan pembayaran aman dari admin':', lalu kirim bukti pembayaran di chat yang sama';
   $('#okWa').href='https://wa.me/6281200000000?text='+encodeURIComponent(t);
   cart=[];coupon='';save();dCo.close();render();dOk.showModal()});
 render();

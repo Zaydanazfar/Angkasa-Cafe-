@@ -6,7 +6,10 @@ fieldset.pay legend{padding:0;margin-bottom:8px;font-size:.85rem;font-weight:600
 .pay-row:has(input:checked){border-color:var(--cx-acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--cx-acc) 25%,transparent)}
 .pay-row input{flex:none;order:3;margin-left:auto;width:18px;height:18px;accent-color:var(--cx-acc)}
 .pl{flex:none;display:flex;gap:6px}
-.pl svg{display:block;width:48px;height:30px;border-radius:6px;box-shadow:0 0 0 1px rgba(0,0,0,.1)}
+.pl svg,.pl img{display:block;width:56px;height:35px;border-radius:7px;box-shadow:0 0 0 1px rgba(0,0,0,.12);background:#fff;object-fit:contain}
 .pn{display:flex;flex-direction:column;min-width:0;font-size:.92rem;font-weight:600;line-height:1.25}
 .pn small{font-weight:400;font-size:.76rem;color:var(--cx-mut)}
-@media(max-width:480px){.pl svg{width:40px;height:25px}.pl{gap:4px}}
+@media(max-width:480px){.pl svg,.pl img{width:44px;height:28px}.pl{gap:4px}}
+.card-box{margin:-2px 0 .9rem;padding:14px 14px 4px;border:1px dashed var(--cx-line);border-radius:14px}
+.card-box .fld{margin-bottom:8px}.card-note{margin:0 0 10px;font-size:.78rem;color:var(--cx-mut)}
+#cardNo.bad{border-color:#e5484d}
