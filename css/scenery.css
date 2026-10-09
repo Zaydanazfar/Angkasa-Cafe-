@@ -1,16 +1,16 @@
 /* Tema terang: pemandangan langit (matahari, awan, burung, pegunungan). Hanya tampil di mode terang. */
-html[data-theme=light] body{background:linear-gradient(180deg,#7cc3f3 0%,#a9d9f9 32%,#d3ecfc 70%,#eef8ff 100%) fixed}
-.scenery{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1s}
+html[data-theme=light] body{background:#cfe9fb}
+.scenery{background:linear-gradient(180deg,#7cc3f3 0%,#a9d9f9 32%,#d3ecfc 70%,#eef8ff 100%);position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1s}
 html[data-theme=light] .scenery{opacity:1}
 html[data-theme=light] .planet,html[data-theme=light] #sky{display:none}
 html[data-theme=light] section.alt{background:rgba(176,218,246,.5)!important}
 html[data-theme=light] .foot{background:rgba(190,226,248,.8)!important}
 
 .sun{position:absolute;top:6%;right:9%;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#fffef2 0 34%,#ffeaa0 60%,rgba(255,225,130,0) 74%);box-shadow:0 0 80px 36px rgba(255,238,175,.55),0 0 200px 90px rgba(255,244,200,.35)}
-.sun:before{content:"";position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,244,200,.38) 0 4deg,transparent 4deg 18deg);-webkit-mask-image:radial-gradient(circle,#000 14%,transparent 68%);mask-image:radial-gradient(circle,#000 14%,transparent 68%);animation:spin 120s linear infinite}
+.sun:before{content:"";position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,244,200,.38) 0 4deg,transparent 4deg 18deg);-webkit-mask-image:radial-gradient(circle,#000 14%,transparent 68%);mask-image:radial-gradient(circle,#000 14%,transparent 68%);animation:spin 120s linear infinite;will-change:transform}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.cloud{position:absolute;left:0;width:var(--w);height:calc(var(--w)*.26);background:#fff;border-radius:999px;opacity:var(--o,.92);filter:drop-shadow(0 10px 14px rgba(70,140,205,.25));animation:drift var(--t) linear infinite;animation-delay:var(--d)}
+.cloud{position:absolute;left:0;width:var(--w);height:calc(var(--w)*.26);background:#fff;border-radius:999px;opacity:var(--o,.92);will-change:transform;animation:drift var(--t) linear infinite;animation-delay:var(--d)}
 .cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}
 .cloud:before{width:42%;height:150%;left:14%;top:-70%}
 .cloud:after{width:32%;height:115%;right:16%;top:-48%}

@@ -14,13 +14,7 @@
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       var el = en.target;
-      if (en.isIntersecting) {
-        el.classList.add('in-view');
-      } else {
-        el.classList.remove('in-view');
-        // keluar lewat atas -> nanti masuk lagi dari atas, dan sebaliknya
-        el.classList.toggle('from-above', en.boundingClientRect.top < 0);
-      }
+      if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); }
     });
   }, { rootMargin: '-8% 0px -8% 0px', threshold: 0 });
 
