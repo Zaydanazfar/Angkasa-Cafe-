@@ -17,9 +17,9 @@
 
 /* ---------- Popup menu ---------- */
 .dr-back{position:fixed;inset:0;z-index:70;background:rgba(2,6,23,.62);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
-.drawer{position:fixed;top:0;bottom:0;left:0;z-index:71;width:min(84vw,330px);display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top,0px)) 14px calc(20px + env(safe-area-inset-bottom,0px));background:var(--card);color:var(--fg);border-right:1px solid var(--line);box-shadow:20px 0 60px rgba(0,0,0,.35);transform:translateX(-102%);transition:transform .38s cubic-bezier(.22,.61,.36,1);overflow-y:auto}
+.drawer{position:fixed;top:0;bottom:0;left:0;z-index:71;width:min(84vw,330px);display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top,0px)) 14px calc(20px + env(safe-area-inset-bottom,0px));background:var(--card);color:var(--fg);border-right:1px solid var(--line);box-shadow:none;transform:translateX(-102%);transition:transform .38s cubic-bezier(.22,.61,.36,1);overflow-y:auto}
 .dr-open .dr-back{opacity:1;visibility:visible}
-.dr-open .drawer{transform:none}
+.dr-open .drawer{transform:none;box-shadow:20px 0 60px rgba(0,0,0,.35)}
 .dr-head{display:flex;align-items:center;justify-content:space-between;margin:0 4px 22px}
 .dr-nav{display:grid;gap:4px}
 .dr-link{display:flex;align-items:center;gap:16px;padding:14px 16px;border-radius:12px;color:var(--fg);text-decoration:none;font-weight:500;min-height:48px;transition:background .2s,color .2s}

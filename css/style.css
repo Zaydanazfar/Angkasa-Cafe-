@@ -1,6 +1,6 @@
 /* Cafe Angkasa — tema langit: biru muda */
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
-:root{--bg:#bfe3fa;--fg:#0f2f4d;--mut:#35597a;--line:#8fc4ea;--alt:#a9d7f5;--card:#f4fbff;--acc:#1f7fcf;--acc2:#7cc0f0;--sh:0 10px 30px rgba(31,127,207,.18)}
+:root{--bg:#bfe3fa;--fg:#0f2f4d;--mut:#27455f;--line:#8fc4ea;--alt:#a9d7f5;--card:#f4fbff;--acc:#1f7fcf;--acc2:#7cc0f0;--sh:0 10px 30px rgba(31,127,207,.18)}
 [data-theme=dark]{--bg:#080a1c;--fg:#eef0ff;--mut:#9ca3cf;--line:#23275a;--alt:#0c0f26;--card:#12163a;--acc:#7c9cff;--acc2:#7c9cff;--sh:0 10px 30px rgba(0,0,10,.5)}
 body{margin:0;font-family:DM Sans,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.65;transition:background .3s,color .3s}
 h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.15;font-weight:500;letter-spacing:-.01em}
