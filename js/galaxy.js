@@ -4,7 +4,7 @@ const root=document.documentElement,reduce=matchMedia('(prefers-reduced-motion:r
 const add=h=>{const d=document.createElement('div');d.innerHTML=h;while(d.firstChild)document.body.prepend(d.firstChild)};
 add('<div class="nebula" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="stars-css" aria-hidden="true"><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i></div><i class="comet" aria-hidden="true" style="--x:12vw;--y:6vh;--c:11s;--d:2s"></i><i class="comet" aria-hidden="true" style="--x:40vw;--y:2vh;--c:17s;--d:9s"></i>');
 /* ornamen: hanya 3 (Saturnus, Bumi besar, Bulan) */
-const P=[['#signature','sat',230,'top:8%;right:-90px',''],['#space','earth big',0,'',''],['#contact','moon',110,'top:10%;right:6%','']],pl=[];
+const P=[['#signature','sat',230,'top:8%;right:-90px',''],['#space','earth big',0,'',''],['#contact','moon',170,'top:8%;right:7%','']],pl=[];
 P.forEach(([sel,k,s,pos])=>{const host=document.querySelector(sel);if(!host)return;const d=document.createElement('div');d.className='planet '+k;if(s)d.style.cssText='--s:'+s+'px;'+pos;d.setAttribute('aria-hidden','true');const gt={sat:1,earth:0,moon:2}[k.split(' ')[0]];d.innerHTML=gt===undefined?'<i class="ball"></i>':'<canvas class="ball gl" data-t="'+gt+'"></canvas>';host.prepend(d);pl.push(d)});
 if('IntersectionObserver'in window)new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('paused',!e.isIntersecting)),{rootMargin:'100px'}).observe&&(()=>{const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('paused',!e.isIntersecting)),{rootMargin:'100px'});pl.forEach(d=>io.observe(d))})();
 /* Bimasakti: digambar sekali ke kanvas statis */

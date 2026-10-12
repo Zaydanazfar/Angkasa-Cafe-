@@ -35,11 +35,10 @@ void main(){
   float sp=smoothstep(.5,.2,length(vec2(lon-.9,(lat+.38)*2.4)));col=mix(col,vec3(.72,.33,.2),sp*.8);
   col*=.07+1.05*smoothstep(-.08,.5,diff);col+=vec3(1.,.8,.55)*pow(1.-z,3.)*.12*smoothstep(-.3,.6,diff);
  }else{
-  vec3 m=rotY(n,rot);float alb=.62+.3*(fbm(m*2.5)-.5);
-  float d=worley(m*4.5),d2=worley(m*10.+5.);
-  alb=alb*(1.-smoothstep(.34,.08,d)*.38-smoothstep(.3,.06,d2)*.2)+smoothstep(.4,.34,d)*smoothstep(.2,.34,d)*.1;
-  alb*=1.-smoothstep(.55,.7,fbm(m*1.4+3.))*.22;
-  col=vec3(alb)*vec3(.96,.96,.93)*(.06+1.12*smoothstep(-.1,.5,diff));
+  float ct=cos(.14),st=sin(.14);vec3 nt=vec3(n.x,n.y*ct-n.z*st,n.y*st+n.z*ct);
+  vec3 m=rotY(nt,rot);float lon=atan(m.x,m.z),lat=asin(clamp(m.y,-1.,1.));
+  float v=texture2D(uTex,vec2(lon/(2.*PI)+.5,.5-lat/PI)).r;v=pow(v,1.35)*1.08;
+  col=vec3(v)*mix(.5,1.,smoothstep(0.,.6,z))*vec3(.98,.985,1.);
  }
  gl_FragColor=vec4(clamp(col,0.,1.)*edge,edge);
 }`;
@@ -51,11 +50,12 @@ function init(cv){
   const pr=gl.createProgram();gl.attachShader(pr,vs);gl.attachShader(pr,fs);gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return null;gl.useProgram(pr);
   const bf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,bf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
   const loc=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-  const U=n=>gl.getUniformLocation(pr,n);gl.uniform1f(U('uType'),type);gl.uniform1f(U('uSpeed'),[.14,.21,.105][type]);
-  const it={cv,gl,uT:U('uT'),type,ready:type!==0,vis:false};
-  if(type===0){const img=new Image();img.onload=()=>{const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+  const U=n=>gl.getUniformLocation(pr,n);gl.uniform1f(U('uType'),type);gl.uniform1f(U('uSpeed'),[.14,.21,.16][type]);
+  const it={cv,gl,uT:U('uT'),type,ready:false,vis:false};
+  const src=type===0?window.EARTH_TEX:type===2?window.MOON_TEX:null;it.ready=!src;
+  if(src){const img=new Image();img.onload=()=>{const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-    gl.uniform1i(U('uTex'),0);it.ready=true;draw(it,performance.now())};img.src=window.EARTH_TEX||''}
+    gl.uniform1i(U('uTex'),0);it.ready=true;draw(it,performance.now())};img.src=src||''}
   return it}
 function fit(it){const D=Math.min(devicePixelRatio||1,it.type===0?1.25:1.5),w=Math.max(2,Math.round(it.cv.clientWidth*D));if(it.cv.width!==w){it.cv.width=it.cv.height=w;it.gl.viewport(0,0,w,w)}}
 function draw(it,t){if(!it.ready)return;fit(it);it.gl.uniform1f(it.uT,t/1000+(it.type*7));it.gl.clearColor(0,0,0,0);it.gl.clear(it.gl.COLOR_BUFFER_BIT);it.gl.drawArrays(it.gl.TRIANGLE_STRIP,0,4)}
@@ -66,7 +66,7 @@ document.querySelectorAll('.planet canvas.gl').forEach(cv=>{
   const it=init(cv);
   if(!it){ // cadangan tanpa WebGL
     if(+cv.dataset.t===0){const im=new Image();im.src='gambar/earth.webp';im.alt='';im.width=im.height=1100;im.style.cssText='width:125%;height:125%;margin:-12.5%;display:block;max-width:none';cv.replaceWith(im)}
-    else{const i=document.createElement('i');i.className='ball';cv.replaceWith(i)}return}
+    else{if(+cv.dataset.t===2){const im=new Image();im.src='gambar/moon.webp';im.alt='';im.style.cssText='width:100%;height:100%;display:block;border-radius:50%';cv.replaceWith(im)}else{const i=document.createElement('i');i.className='ball';cv.replaceWith(i)}}return}
   items.push(it);
   if('IntersectionObserver'in window)new IntersectionObserver(es=>es.forEach(e=>{it.vis=e.isIntersecting;if(it.vis){if(reduce)draw(it,6000);kick()}}),{rootMargin:'80px'}).observe(cv);else it.vis=true;
 });
