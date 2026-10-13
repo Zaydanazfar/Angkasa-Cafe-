@@ -40,10 +40,13 @@ html[data-theme=dark] .foot{background:rgba(7,9,26,.72)!important}
 .planet.sat .ball.gl{box-shadow:0 0 70px rgba(255,190,120,.18)}
 .planet.moon .ball.gl{box-shadow:0 0 34px 8px rgba(255,255,255,.5),0 0 90px 26px rgba(190,210,255,.28)}
 /* Bumi besar mengintip dari tepi bawah section */
-.space{--ed:min(80vw,560px);padding-bottom:calc(var(--ed)*.42 + 36px)}
+.space{--ed:min(88vw,620px);padding-bottom:calc(var(--ed)*.42 + 36px)}
 .planet.earth.big{width:var(--ed);height:var(--ed);left:50%;margin-left:calc(var(--ed)/-2);bottom:calc(var(--ed)*-.625);top:auto}
 .planet.earth.big .ball.gl{box-shadow:0 -4px 36px 6px rgba(110,190,255,.55),0 -14px 100px 18px rgba(60,130,255,.3)}
 .planet.paused{animation-play-state:paused}
 
 /* HP: planet bercincin dipindah ke area kosong di atas judul agar tidak tertutup kartu */
 @media(max-width:600px){#signature .planet.sat{top:-38px!important;right:-64px!important;scale:.5;opacity:.95}}
+
+/* HP: Bumi dibuat besar (sebelumnya ikut mengecil bersama planet lain) */
+@media(max-width:600px){.space{--ed:130vw}.planet.earth.big{scale:1;opacity:1}}
