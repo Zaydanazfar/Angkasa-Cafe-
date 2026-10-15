@@ -14,6 +14,6 @@ const solo=[ // y, ukuran, durasi lintas, delay, kepak, opacity, arah balik
  ['14%',34,64,-30,.9,.88,0],['33%',22,78,-55,.8,.7,1],['9%',16,92,-12,.7,.55,0],['41%',28,70,-5,1.0,.8,1]
 ].map(([y,s,t,d,fl,o,r])=>`<div class="bd" style="--y:${y};--t:${t}s;--d:${d}s;--s:${s}px;--bb:${2.6+s/40}s">${bird(r?'rev':'','',fl,0,o)}</div>`).join('');
 el.innerHTML='<img class="sc-sun" src="gambar/scene/sun.webp" alt="" decoding="async">'+solo+flock+
- '<div class="mtn"><div class="mtn-in"><img src="gambar/scene/mountains.webp" alt="" decoding="async"><div class="fall"><img src="gambar/scene/fall.webp" alt="" decoding="async"></div></div></div>';
+ '<div class="mtn"><div class="mtn-in"><img src="gambar/scene/mountains.webp" alt="" decoding="async"><div class="fall"><img src="gambar/scene/fall.webp" alt="" decoding="async"></div><div class="mist m1"><i></i></div><div class="mist m2"><i></i></div></div></div><div class="forest"><img src="gambar/scene/forest.webp" alt="" decoding="async"></div>';
 document.body.prepend(el);
 })();

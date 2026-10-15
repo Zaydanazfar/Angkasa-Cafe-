@@ -1,10 +1,10 @@
 /* Tema terang: pemandangan gunung asli + air terjun beranimasi + burung terbang. Tanpa awan. Hanya di mode terang. */
 html[data-theme=light] body{background:#cfe9fb}
-.scenery{background:radial-gradient(ellipse 55% 45% at 86% 7%,rgba(255,246,222,.55),transparent 70%),linear-gradient(180deg,#4f9ee3 0%,#78b7ec 28%,#a9d3f3 55%,#d3e9f8 80%,#eaf3f8 100%);position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1s}
+.scenery{background:radial-gradient(ellipse 55% 45% at 86% 7%,rgba(255,214,186,.65),transparent 72%),linear-gradient(180deg,#86a9e0 0%,#b3bfec 24%,#dcc6e0 48%,#f4cfd2 70%,#fbe6d8 100%);position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1s}
 html[data-theme=light] .scenery{opacity:1}
 html[data-theme=light] .planet,html[data-theme=light] #sky{display:none}
-html[data-theme=light] section.alt{background:rgba(228,242,252,.58)!important}
-html[data-theme=light] .foot{background:rgba(226,241,252,.88)!important}
+html[data-theme=light] section.alt{background:rgba(252,242,247,.58)!important}
+html[data-theme=light] .foot{background:rgba(251,238,244,.9)!important}
 
 .sc-sun{position:absolute;top:-16%;right:-6%;width:min(620px,70vw);height:auto;opacity:.9}
 
@@ -12,7 +12,7 @@ html[data-theme=light] .foot{background:rgba(226,241,252,.88)!important}
 .mtn{--mh:max(240px,min(44vw,66vh));--ox:.56;--w:max(100vw,calc(var(--mh)*2.925));position:absolute;left:0;right:0;bottom:0;height:var(--mh)}
 .mtn-in{position:absolute;bottom:0;width:var(--w);left:calc((100% - var(--w))*var(--ox));aspect-ratio:1600/547}
 .mtn-in>img{position:absolute;inset:0;width:100%;height:100%;display:block}
-.fall{position:absolute;overflow:hidden;left:23.75%;top:43.1%;width:12.5%;height:41.7%}
+.fall{position:absolute;overflow:hidden;left:21.25%;top:42.05%;width:17.5%;height:43.14%}
 .fall img{display:block;width:800%;height:100%;max-width:none;animation:ff .9s steps(8) infinite}
 @keyframes ff{to{transform:translateX(-100%)}}
 
@@ -27,3 +27,13 @@ html[data-theme=light] .foot{background:rgba(226,241,252,.88)!important}
 
 @media(max-width:600px){.mtn{--mh:290px;--ox:.28}.sc-sun{width:90vw;top:-10%}}
 @media(prefers-reduced-motion:reduce){.flock,.bd,.b,.fall img{animation:none}.flock,.bd{transform:translateX(30vw)}}
+
+/* Kabut lembah yang bergeser pelan + hutan pinus di depan */
+.mist{position:absolute;left:0;right:0;bottom:2%;height:30%;overflow:hidden;pointer-events:none}
+.mist i{position:absolute;top:0;left:0;width:200%;height:100%;background-repeat:repeat-x;background-size:50% 100%;animation:mist var(--t) linear infinite;will-change:transform}
+.mist.m1 i{background-image:url(../gambar/scene/mist1.webp);--t:170s;opacity:.5}
+.mist.m2{bottom:-4%;height:26%}.mist.m2 i{background-image:url(../gambar/scene/mist2.webp);--t:110s;animation-direction:reverse;opacity:.4}
+@keyframes mist{to{transform:translateX(-50%)}}
+.forest{position:absolute;left:0;right:0;bottom:0;height:min(30vh,300px);min-height:150px}
+.forest img{width:100%;height:100%;object-fit:cover;object-position:50% 100%;display:block}
+@media(prefers-reduced-motion:reduce){.mist i{animation:none}}

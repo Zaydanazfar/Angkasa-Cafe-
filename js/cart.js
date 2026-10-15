@@ -112,7 +112,7 @@ f.addEventListener('submit',e=>{e.preventDefault();if(!cart.length)return;chkPho
   $('#okEta').textContent={dine:'10–15 menit',pickup:'10–15 menit',delivery:'25–40 menit'}[o.type];
   $('#okLast').textContent={dine:'Diantar ke meja',pickup:'Siap diambil',delivery:'Dalam perjalanan'}[o.type];
   $('#okPayNote').textContent=o.pay==='cash'?' dan siapkan pembayaran tunai':o.pay==='card'?', lalu tunggu tautan pembayaran aman dari admin':', lalu kirim bukti pembayaran di chat yang sama';
-  $('#okWa').href='https://wa.me/6287850849009?text='+encodeURIComponent(t);
+  $('#okWa').href='https://wa.me/6281200000000?text='+encodeURIComponent(t);
   cart=[];coupon='';save();dCo.close();render();dOk.showModal()});
 render();
 })();
